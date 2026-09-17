@@ -1,0 +1,128 @@
+---MySQL ---
+MySQL is used to store information.
+
+Full-stack : 1.frontend,backend
+
+1.Frontend:
+ it is a client side application
+
+display web pages and ui
+accepts user input
+validates user input before sending it to the server.
+
+
+what is data?
+ it is a raw facts or  figures without context.
+ex: 101,malli,50000,hyd.
+
+what is field?
+
+field means smallest unit in database like(column or attribute)
+example:
+ename,esalary,eaddress,eid
+
+what is record?
+collection of related fields like that of(row / ruple)
+
+example:(142, 'santosh',100000)
+
+what is database?
+
+Organized collection of related records stored together.
+example: an employee database containing all employee records.
+
+
+
+=== CLIENT-SERVER-ARCHITETURE ===
+
+They are 3 components:
+
+client - The role of the client in client-server architecture is to send requests to the server and to get response from the server.
+
+server - The server is a software,the role of the server in client-server architecture is to take reques from the clients.if the request is valid request it will generate some response and we can handover that response to client.if the client-request is not valid request it will raise some error status codes.
+
+protocol - It has asset of rules and regulations.The role of the protocol in client-server-architecture is to send request from client to server.
+
+
+=== DATA MODELS IN DBMS === (not asked in interview about this question)
+
+=== identifiers:  ====
+
+identifiers is nothing but variables,class,functions.
+   a-z,A - Z,0-9,_,# - QRE VALID
+-->identifiers should  not start with digit.
+spaces are not considered to declare identifiers.
+reserved words not considered to declare identifiers.
+max length to declare identifiers is 15.
+
+
+
+==== SQL ====
+
+SQL(structured query language):
+ SQL is a structured query language that is used to communicate.
+it is a standardized programming language specially designed for managing and manipulating relational databases.It provides a declarative syntax that allows users to define what data they want retrive,insert,update or delete without specifying exactly how database should execute these operations.
+
+===SQL COMMANDS ==
+1.DDL: Data Definition Language.
+   Defines and modifies the structure of database objects(tables, schemas,indexes)
+  they are 5 commands:
+   1.CREATE: CREATES  anew data bases objects such as tables,database,views,indexes or triggers .. etc
+    ---> How to create database/schema?
+        syntax:
+             CREATE DATABASE database-name;
+                or
+             CREATE SCHEMA database-name;
+    --->How to create table?
+        syntax:
+             CREATE TABLE table-name(
+             column-name datatype(size) constraint,
+             column-name datatype(size) constraint,
+             column-name datatype(size) constraint,
+                     |
+                     |
+             column-name datatype(size) constraint,
+
+ 
+     2.Drop: Permanently  deletes an existing database objects(table,database,index,views)along with its data and structure.
+     --->How to drop database/schema?
+         syntax:
+           drop database database-name;
+                  or
+           drop schema database-name;
+     --->How to drop table?
+         syntax:
+           drop table table-name;
+
+   3.ALTER:By using alter command we can modify the existing table structure.
+   
+   4.TRUNCATE:
+   5.RENAME:
+
+2.DML: Data Manipulation Language:
+   It manages data stored within the database objects(insert,update,delete)
+
+3.DCL: Data Control Language.
+   It manages permissions and access control on database objects.
+
+4.TCL: Transaction Control Language.
+   It manages transaction to maintain data integrity.
+
+5.DQL: Data Query Language
+   It is used to fetch/retrieve data from the database. 
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
