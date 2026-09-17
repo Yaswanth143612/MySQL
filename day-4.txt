@@ -1,0 +1,431 @@
+=== sql day-4 ==
+
+--- DML COMMANDS ----
+
+INSERT:
+-->it is used to insert the values to the columns and rows which we want to add it can be added using insert operation into the existing data base.
+SYNTAX:
+insert into tablename(column-name1,column-name2
+
+
+drop:
+  -->it removes the table or object.
+  -->table-structure+data will be droped.
+  -->table structure removed
+  -->performance is slow (due to full removal)
+
+delete:
+  -->removes a specific rows from a table
+  -->specific rows based on condition.
+  -->table structure intact
+  -->performance is slower(row-by-row)
+truncate:
+  -->removes all rows and keeps structure.
+  -->all rows removed
+  -->table structure intact
+  -->performance is fast(bulk-deletion)
+
+------------------------------------------------------------------------
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use pfs6
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_pfs6 |
++----------------+
+| company_staff  |
+| employees      |
++----------------+
+2 rows in set (0.01 sec)
+
+mysql> desc company_staff
+    -> ^C
+mysql> desc company_staff;
++---------------+----------------------------------------------------+------+-----+---------+-------+
+| Field         | Type                                               | Null | Key | Default | Extra |
++---------------+----------------------------------------------------+------+-----+---------+-------+
+| company_name  | varchar(15)                                        | YES  |     | NULL    |       |
+| emp_id        | int                                                | YES  |     | NULL    |       |
+| qualification | varchar(20)                                        | YES  |     | NULL    |       |
+| age           | tinyint                                            | YES  |     | NULL    |       |
+| experience    | smallint                                           | YES  |     | NULL    |       |
+| gender        | char(1)                                            | YES  |     | NULL    |       |
+| employee_name | varchar(25)                                        | YES  |     | NULL    |       |
+| address       | tinyint                                            | YES  |     | NULL    |       |
+| salary        | decimal(15,3)                                      | YES  |     | NULL    |       |
+| bonus         | int                                                | YES  |     | NULL    |       |
+| department    | enum('Hr','Sales','Finance','Support')             | YES  |     | NULL    |       |
+| status        | varchar(15)                                        | YES  |     | NULL    |       |
+| skills        | set('Java','Python','SQL','Excel','Communication') | YES  |     | NULL    |       |
+| joining_date  | date                                               | YES  |     | NULL    |       |
+| email         | char(1)                                            | YES  |     | NULL    |       |
+| phone_no      | int                                                | YES  |     | NULL    |       |
++---------------+----------------------------------------------------+------+-----+---------+-------+
+16 rows in set (0.00 sec)
+
+mysql> desc employees;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| empid      | char(5)      | YES  |     | NULL    |       |
+| first_name | varchar(50)  | YES  |     | NULL    |       |
+| last_name  | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| doj        | date         | YES  |     | NULL    |       |
+| address    | tinytext     | YES  |     | NULL    |       |
+| dept       | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> -- INSERT: --
+mysql> insert into employees(empid,first_name,last_name,age,doj,address,dept)
+    -> values('CGVI200','HARSHINI',GOLUSU',22,'31-08-2026','VIZAG','PFS');
+    '> ^C
+mysql> insert into employees(empid,first_name,last_name,age,doj,address,dept)
+    -> values
+    -> ('e0001','harshini','golusu','21','23-01-2024','vizag','trainee');
+ERROR 1292 (22007): Incorrect date value: '23-01-2024' for column 'doj' at row 1
+mysql> ('e0001','harshini','golusu','21','2024-01-23','vizag','trainee');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''e0001','harshini','golusu','21','2024-01-23','vizag','trainee')' at line 1
+mysql> use pfs6;
+Database changed
+mysql> desc employees;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| empid      | char(5)      | YES  |     | NULL    |       |
+| first_name | varchar(50)  | YES  |     | NULL    |       |
+| last_name  | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| doj        | date         | YES  |     | NULL    |       |
+| address    | tinytext     | YES  |     | NULL    |       |
+| dept       | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into employees(empid,first_name,last_name,age,doj,address,dept)
+    -> values
+    -> ('e0001','harshini','golusu',21,'23-01-2024','vizag','trainee');
+ERROR 1292 (22007): Incorrect date value: '23-01-2024' for column 'doj' at row 1
+mysql> ('e0001','harshini','golusu','21','2024-01-23','vizag','trainee');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''e0001','harshini','golusu','21','2024-01-23','vizag','trainee')' at line 1
+mysql> ^C
+mysql> insert into employees values('e0004','jani','basha',25,'2026-02-17','vzy','pharma');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employees values('e0005','harshini','golusu',25,'2026-01-19','hyd','software'),
+    -> ('e0006','priya',darshan',21,'2026-03-21','vzm','trainee');
+    '> ^C
+mysql> insert into employees values('e0005','harshini','golusu',25,'2026-01-19','hyd','software'),
+    -> ('e0006','priya','darshan',21,'2026-03-21','vzm','trainee'),('e0007','laya','sharin',26,'2026-04-22','rj','tech');
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+----------+
+| empid | first_name | last_name | age  | doj        | address | dept     |
++-------+------------+-----------+------+------------+---------+----------+
+| e0004 | jani       | basha     |   25 | 2026-02-17 | vzy     | pharma   |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee  |
+| e0007 | laya       | sharin    |   26 | 2026-04-22 | rj      | tech     |
++-------+------------+-----------+------+------------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employees(doj,dept,address,empid,first_name,last_name,age)
+    -> values
+    -> ('2007-03-21','sales','vzg','e0008','indhu','sree',26);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employees(empid,first_name,age,dept)values('e0008','thanu',22,'process associate');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | jani       | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | sharin    |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sree      |   26 | 2007-03-21 | vzg     | sales             |
+| e0008 | thanu      | NULL      |   22 | NULL       | NULL    | process associate |
++-------+------------+-----------+------+------------+---------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into employees(empid,first_name,last_name,address,dept)values('e0009','kusuma','priya','grt','infomation tech');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | jani       | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | sharin    |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sree      |   26 | 2007-03-21 | vzg     | sales             |
+| e0008 | thanu      | NULL      |   22 | NULL       | NULL    | process associate |
+| e0009 | kusuma     | priya     | NULL | NULL       | grt     | infomation tech   |
++-------+------------+-----------+------+------------+---------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> update employees set first_name='santosh' where empid='e0004';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees where empid='e0004';
++-------+------------+-----------+------+------------+---------+--------+
+| empid | first_name | last_name | age  | doj        | address | dept   |
++-------+------------+-----------+------+------------+---------+--------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma |
++-------+------------+-----------+------+------------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> update employees set last_name='sri' where empid='e0008';
+Query OK, 2 rows affected (0.23 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select*from employees where empid='e0008';
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0008 | thanu      | sri       |   22 | NULL       | NULL    | process associate |
++-------+------------+-----------+------+------------+---------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql> update employees set age=50 where age is null;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | sharin    |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0008 | thanu      | sri       |   22 | NULL       | NULL    | process associate |
+| e0009 | kusuma     | priya     |   50 | NULL       | grt     | infomation tech   |
++-------+------------+-----------+------+------------+---------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> update employees set empid='e0009' where first_name='thanu';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set last_name='krish' where last_name='sharin';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | krish     |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0009 | thanu      | sri       |   22 | NULL       | NULL    | process associate |
+| e0009 | kusuma     | priya     |   50 | NULL       | grt     | infomation tech   |
++-------+------------+-----------+------+------------+---------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> update employees set doj='2026-09-05' where first_name='thanu';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | krish     |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0009 | thanu      | sri       |   22 | 2026-09-05 | NULL    | process associate |
+| e0009 | kusuma     | priya     |   50 | NULL       | grt     | infomation tech   |
++-------+------------+-----------+------+------------+---------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> update employees set empid='e0010' where first_name='kusuma';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees set address='kolkata' where dept='information tech';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | krish     |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0009 | thanu      | sri       |   22 | 2026-09-05 | NULL    | process associate |
+| e0010 | kusuma     | priya     |   50 | NULL       | grt     | infomation tech   |
++-------+------------+-----------+------+------------+---------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> delete from employees where empid='e0010';
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from employees;
++-------+------------+-----------+------+------------+---------+-------------------+
+| empid | first_name | last_name | age  | doj        | address | dept              |
++-------+------------+-----------+------+------------+---------+-------------------+
+| e0004 | santosh    | basha     |   25 | 2026-02-17 | vzy     | pharma            |
+| e0005 | harshini   | golusu    |   25 | 2026-01-19 | hyd     | software          |
+| e0006 | priya      | darshan   |   21 | 2026-03-21 | vzm     | trainee           |
+| e0007 | laya       | krish     |   26 | 2026-04-22 | rj      | tech              |
+| e0008 | indhu      | sri       |   26 | 2007-03-21 | vzg     | sales             |
+| e0009 | thanu      | sri       |   22 | 2026-09-05 | NULL    | process associate |
++-------+------------+-----------+------+------------+---------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> drop table employees;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     job_role VARCHAR(50),
+    ->     salary DECIMAL(10,2),
+    ->     joining_date DATE,
+    ->     city VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql>
+mysql>
+mysql> INSERT INTO employees
+    -> (emp_id, emp_name, department, job_role, salary, joining_date, city)
+    -> VALUES
+    -> (101, 'Ravi Kumar', 'IT', 'Developer', 45000, '2023-01-15', 'Vizag'),
+    -> (102, 'Priya Sharma', 'HR', 'HR Manager', 55000, '2022-06-20', 'Hyderabad'),
+    -> (103, 'Kiran Reddy', 'IT', 'Tester', 40000, '2023-03-10', 'Vizag'),
+    -> (104, 'Sneha Rao', 'Finance', 'Accountant', 48000, '2021-11-25', 'Chennai'),
+    -> (105, 'Arun Kumar', 'IT', 'Developer', 60000, '2020-08-18', 'Bangalore'),
+    -> (106, 'Divya Reddy', 'HR', 'Recruiter', 35000, '2024-01-05', 'Vizag'),
+    -> (107, 'Suresh Babu', 'Sales', 'Executive', 42000, '2022-09-12', 'Hyderabad'),
+    -> (108, 'Anjali Devi', 'IT', 'Developer', 70000, '2019-05-30', 'Chennai'),
+    -> (109, 'Mahesh Kumar', 'Sales', 'Manager', 65000, '2020-02-14', 'Bangalore'),
+    -> (110, 'Lakshmi Rao', 'Finance', 'Analyst', 52000, '2023-07-22', 'Hyderabad');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select*from employees;
++--------+--------------+------------+------------+----------+--------------+-----------+
+| emp_id | emp_name     | department | job_role   | salary   | joining_date | city      |
++--------+--------------+------------+------------+----------+--------------+-----------+
+|    101 | Ravi Kumar   | IT         | Developer  | 45000.00 | 2023-01-15   | Vizag     |
+|    102 | Priya Sharma | HR         | HR Manager | 55000.00 | 2022-06-20   | Hyderabad |
+|    103 | Kiran Reddy  | IT         | Tester     | 40000.00 | 2023-03-10   | Vizag     |
+|    104 | Sneha Rao    | Finance    | Accountant | 48000.00 | 2021-11-25   | Chennai   |
+|    105 | Arun Kumar   | IT         | Developer  | 60000.00 | 2020-08-18   | Bangalore |
+|    106 | Divya Reddy  | HR         | Recruiter  | 35000.00 | 2024-01-05   | Vizag     |
+|    107 | Suresh Babu  | Sales      | Executive  | 42000.00 | 2022-09-12   | Hyderabad |
+|    108 | Anjali Devi  | IT         | Developer  | 70000.00 | 2019-05-30   | Chennai   |
+|    109 | Mahesh Kumar | Sales      | Manager    | 65000.00 | 2020-02-14   | Bangalore |
+|    110 | Lakshmi Rao  | Finance    | Analyst    | 52000.00 | 2023-07-22   | Hyderabad |
++--------+--------------+------------+------------+----------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employees add email varchar(100);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees add phone_no varchar(15);
+Query OK, 0 rows affected (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | int           | NO   | PRI | NULL    |       |
+| emp_name     | varchar(100)  | YES  |     | NULL    |       |
+| department   | varchar(50)   | YES  |     | NULL    |       |
+| job_role     | varchar(50)   | YES  |     | NULL    |       |
+| salary       | decimal(10,2) | YES  |     | NULL    |       |
+| joining_date | date          | YES  |     | NULL    |       |
+| city         | varchar(50)   | YES  |     | NULL    |       |
+| email        | varchar(100)  | YES  |     | NULL    |       |
+| phone_no     | varchar(15)   | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> alter table employees modify city varchar(100);
+Query OK, 10 rows affected (0.14 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees change job_role designation varchar(50);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | int           | NO   | PRI | NULL    |       |
+| emp_name     | varchar(100)  | YES  |     | NULL    |       |
+| department   | varchar(50)   | YES  |     | NULL    |       |
+| designation  | varchar(50)   | YES  |     | NULL    |       |
+| salary       | decimal(10,2) | YES  |     | NULL    |       |
+| joining_date | date          | YES  |     | NULL    |       |
+| city         | varchar(100)  | YES  |     | NULL    |       |
+| email        | varchar(100)  | YES  |     | NULL    |       |
+| phone_no     | varchar(15)   | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> alter table employees drop column phone_no;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> slect*from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect*from employees' at line 1
+mysql> select*from employees;
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+| emp_id | emp_name     | department | designation | salary   | joining_date | city      | email |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+|    101 | Ravi Kumar   | IT         | Developer   | 45000.00 | 2023-01-15   | Vizag     | NULL  |
+|    102 | Priya Sharma | HR         | HR Manager  | 55000.00 | 2022-06-20   | Hyderabad | NULL  |
+|    103 | Kiran Reddy  | IT         | Tester      | 40000.00 | 2023-03-10   | Vizag     | NULL  |
+|    104 | Sneha Rao    | Finance    | Accountant  | 48000.00 | 2021-11-25   | Chennai   | NULL  |
+|    105 | Arun Kumar   | IT         | Developer   | 60000.00 | 2020-08-18   | Bangalore | NULL  |
+|    106 | Divya Reddy  | HR         | Recruiter   | 35000.00 | 2024-01-05   | Vizag     | NULL  |
+|    107 | Suresh Babu  | Sales      | Executive   | 42000.00 | 2022-09-12   | Hyderabad | NULL  |
+|    108 | Anjali Devi  | IT         | Developer   | 70000.00 | 2019-05-30   | Chennai   | NULL  |
+|    109 | Mahesh Kumar | Sales      | Manager     | 65000.00 | 2020-02-14   | Bangalore | NULL  |
+|    110 | Lakshmi Rao  | Finance    | Analyst     | 52000.00 | 2023-07-22   | Hyderabad | NULL  |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> update employees set salary=50000 where empid='101';
+ERROR 1054 (42S22): Unknown column 'empid' in 'where clause'
+mysql> update employees set salary=50000 where emp_id='101';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
