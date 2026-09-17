@@ -1,0 +1,181 @@
+==== CONSTRAINTS ===
+
+constraints are rules applied to a table columns in MySQL to ensure that only valid under accurate data is stored in  the data base.
+
+--> Insimple words:
+ constraints = rules that control the data entered into a table.
+
+why do we use constraints?
+
+constraints are used to:
+1.maintain data integrity
+2.prevents invalid data entry.
+3.Avoid duplicate records.
+4.ensures relationships between tables,
+5.make the database reliable and consistent.
+
+
+Types of constraints:
+
+1.not null key:
+
+    The not-null constraints ensures that a column cannot contain "NULL"(empty)values.Every row must have a value for that column.
+    -- Not-Null doesn't allow null values.
+
+2.unique key:
+
+    The unique key constraint ensures that all values in a column are different.
+    Duplicate values are not allowed.
+
+3.*** primary key: ****
+
+    Primary key is the combination of both  Not-null and Unique Key constraints.
+     
+4.composite key:
+
+    Composite key constraint means the combination of more than one primary key .
+    If we applied more than one column primary key then we should go for composite key constraint.
+    It can applicable only for table-level not at column-level.
+
+5.***foreign key:****
+       A foreign key creates a relationship b/w two tables.
+       It ensures that value in the child table must already exists in the parent table.
+  
+==> Referencial actions:
+     Referencial defines what happens to child table data when parent table data is updated or deleted.
+     ---> ON DELETE CASCADE, ON UPDATE CASCADE
+     ---> ON DELETE SET NULL, ON UPDATE SET NULL.      
+    
+6.default key:
+
+   The default constraint automatically assigns a predefined value if no value is provided during insertion.
+
+7.check constraint  key:
+   
+    The check-constraints ensures that values satisfy a specified condition before insertion or update.
+
+
+
+***foreign key:****
+       A foreign key creates a relationship b/w two tables.
+       It ensures that value in the child table must already exists in the parent table.
+  
+==> Referencial actions:
+     Referencial defines what happens to child table data when parent table data is updated or deleted.
+     ---> ON DELETE CASCADE, ON UPDATE CASCADE
+     ---> ON DELETE SET NULL, ON UPDATE SET NULL. 
+
+example:   
+
+
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use pfs6;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_pfs6 |
++----------------+
+| company_staff  |
+| employees      |
++----------------+
+2 rows in set (0.03 sec)
+
+mysql> create table department(
+    -> doc_id int primary key,
+    -> doc_id int primary key,^C
+mysql> create table department(
+    -> dep_id int primary key,
+    -> dep_name varchar(20));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> create table doctors(
+    -> doc_id int primary key,
+    -> doc_name varchar(25),
+    -> doc_sal int,
+    -> dep_id int^C
+mysql> create table doctors(
+    -> doc_id int primary key,
+    -> doc_name varchar(25),
+    -> doc_sal int,
+    -> dep_id int,
+    -> foreign key(dep_id)
+    -> references department(dep_id)
+    -> on delete set null on update set null
+    -> );
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> insert into department values(1,'cardiology'),(2,'orthopedic'),(3,'gynacologist');
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into doctors values(111,'santosh',100000,1),(222,'sanju',50000,3),(333,'ajay',90000,1);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from department;
++--------+--------------+
+| dep_id | dep_name     |
++--------+--------------+
+|      1 | cardiology   |
+|      2 | orthopedic   |
+|      3 | gynacologist |
++--------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from doctors;
++--------+----------+---------+--------+
+| doc_id | doc_name | doc_sal | dep_id |
++--------+----------+---------+--------+
+|    111 | santosh  |  100000 |      1 |
+|    222 | sanju    |   50000 |      3 |
+|    333 | ajay     |   90000 |      1 |
++--------+----------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update department set dep_id=10 where dep_id=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> delete from doctors where doc_id=222;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from department;
++--------+--------------+
+| dep_id | dep_name     |
++--------+--------------+
+|      1 | cardiology   |
+|      2 | orthopedic   |
+|     10 | gynacologist |
++--------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from doctors;
++--------+----------+---------+--------+
+| doc_id | doc_name | doc_sal | dep_id |
++--------+----------+---------+--------+
+|    111 | santosh  |  100000 |      1 |
+|    333 | ajay     |   90000 |      1 |
++--------+----------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
